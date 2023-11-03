@@ -1,0 +1,27 @@
+title: Rundll32.exe executing single char entry
+id: 83511662-4156-4caa-a393-fb55e8ecf30e
+status: experimental
+description: A rundll32.exe command-line argument contained TTPs of a recent Qakbot
+      sample where a .dll file is loaded from the %TEMP% directory and calls an entry point
+      named a single character i.e. -- #1
+references:
+    - <internet link>
+author: Trent Liffick
+date: 2023/06/02
+tags:
+    - attack.defense_evasion
+    - attack.T1218.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        - Image|endswith: '\rundll32.exe'
+    selection_path:
+        CommandLine|contains:
+            - '\AppData\Local\Temp\'
+            - '.dll,#'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
