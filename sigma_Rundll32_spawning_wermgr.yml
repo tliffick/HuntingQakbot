@@ -1,0 +1,26 @@
+title: Rundll32.exe spawned wermgr.exe
+id: ef0caf38-0f3f-4ac1-a1b9-086cc961873b
+status: experimental
+description: Detects rundll32.exe spawning wermgr.exe.  This is an observed TTP of Trickbot and Qakbot campaigned in the Summer of 2021.
+references:
+    - <internal link>
+author: Trent Liffick
+date: 2021/05/18
+tags:
+    - attack.defense_evasion
+    - attack.T1218.001
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_details:
+        ParentImage|endswith: '\rundll32.exe'
+        ParentCommandLine|contains:
+            - '\AppData\Local\Temp\'
+            - '\AppData\Roaming\'
+            - '.dll'
+        Image|endswith: '\wermgr.exe'
+    condition: all of selection_*
+falsepositives:
+    - unknown
+level: high

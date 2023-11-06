@@ -1,0 +1,29 @@
+title: PowerShell spawned rundll32.exe
+id: 6d819589-fc74-4cdd-8035-926f3b077cdf
+status: experimental
+description: Detects a PowerShell binary spawning rundll32.exe.  Could be potential Qakbot activity observed in Spring/Summer of 2023.
+references:
+    - <internal link>
+author: Trent Liffick
+date: 2023/05/30
+tags:
+    - attack.defense_evasion
+    - attack.T1218.001
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_details:
+        ParentImage|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+        Image|endswith: '\rundll32.exe'
+        CommandLine|contains:
+            - '\AppData\Local\Temp\'
+            - '\AppData\Roaming\'
+            - '.dll'
+    condition: all of selection_*
+falsepositives:
+    - unknown
+level: medium
