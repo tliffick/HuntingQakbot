@@ -6,12 +6,9 @@ rule Classification_TA577_JS_Downloader : T1059_007 {
         description = "Detects the obfuscation of the JavaScript code seen downloading TA577 paylaoads. (Historically, these have led to Qakbot, Pikabot, RansomRight and DarkGate.)"
         scope = "detection"
         platform = "icet"
-        references = "https://wiki.idr.nube.53.com/display/IDR/Qakbot"
-        references = "https://github.info53.com/orgs/Fifth-Third/projects/10#card-21274"
         references = "fd82aabebd4b206d46ba0d6f3cbdcb9ea620086dba75851c03fd618a3c96b439"
         references = "https://github.com/pr0xylife/Qakbot/blob/main/Qakbot_BB18_06.03.2023.txt"
         references = "85d8a235314c371d4891baeb0d05116854dabda2aa562a93e51aa22914c2487f"
-        references = "https://github.info53.com/orgs/Fifth-Third/projects/10#card-21356"
         references = "195b29e6cf73f2cf663b588df69eff43a1e7f27c1dbbd119cf816c99aa556fa1"
     strings:
         /*

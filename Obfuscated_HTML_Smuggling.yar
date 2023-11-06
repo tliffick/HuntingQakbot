@@ -6,8 +6,7 @@ rule Obfuscated_HTML_Smuggling: Mitre_T1027_006 {
         description = "More ways to detect obfuscated HTML smuggling, specifically with use of atob b64 function to call and render a webpage or cred harvester in browser"
         platform = "icet"
         scope = "detection"
-    file_ext = "htm,html"
-    references = "https://ice.info53.com/ace/analysis?alert_uuid=e9cfc552-283f-4e63-b5e2-1d4dc2f196af"
+        file_ext = "htm,html"
 
     strings:
     // stupid plus signs to append function names
