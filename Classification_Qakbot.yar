@@ -8,7 +8,7 @@ rule Classification_Qakbot: T1055
         date = "2021-10-22"
         description = "Qakbot"
         references = ""
-        hashes = "98140e5672de3f7c9239b112d0a2bf63
+        hashes = "98140e5672de3f7c9239b112d0a2bf63"
         scope = "detection"
         platform = "ICET,FDR"
         fdr_scope = "shellcode"

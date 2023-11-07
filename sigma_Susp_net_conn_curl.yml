@@ -1,0 +1,27 @@
+title: Suspicious network connection from curl
+id: 0c6d8908-3fa1-427c-ab17-46585cdf97a8
+status: experimental
+description: curl.exe establlished a network connection via internet protocols
+references:
+    - <internal link>
+author: Trent Liffick
+date: 2022/06/24
+tags:
+    - attack.command_and_control
+    - attack.T1105
+    - attack.defense_evasion
+    - attack.T1218.001
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_details:
+        Image|endswith: '\rundll32.exe'
+        CommandLine|contains:
+            - 'http://'
+            - 'https://'
+            - 'ftp://'
+    condition: all of selection_*
+falsepositives:
+    - unknown
+level: medium

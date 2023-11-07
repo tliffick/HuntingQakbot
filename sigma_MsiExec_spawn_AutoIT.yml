@@ -1,0 +1,25 @@
+title: MsiExec spawning AutoIT binary
+id: 584aa349-ad67-4551-8cfc-fde0d34dc0d7
+status: experimental
+description: The msiengine (msiexec) was observed spawning an AutoIT binary.  This behavior has been observed in Screenshotter campaigns in early 2023.
+references:
+    - <internet link>
+author: Trent Liffick
+date: 2023/02/23
+tags:
+    - attack.defense_evasion
+    - attack.T1218.007
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_details:
+        ParentImage|endswith: '\msiexec.exe'
+        Image|endswith:
+            - '\AutoHotKey.exe'
+            - '\Autoit3.exe'
+            - '\au3.exe'
+    condition: all of selection_*
+falsepositives:
+    - unknown
+level: medium
