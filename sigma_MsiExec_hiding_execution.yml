@@ -1,0 +1,26 @@
+title: MsiEngine Hiding Rundll32 execution
+id: 148ff3d7-2782-41c0-a416-9800b4978d5b
+status: experimental
+description: The msiengine passes the HideWindow argument in attempts to hide the execution of a rundll32.exe command. This behavior was observed in a recent Qakbot sample where a .dll file is loaded from the %TEMP% directory
+references:
+    - <internet link>
+author: Trent Liffick
+date: 2023/12/18
+tags:
+    - attack.defense_evasion
+    - attack.T1218.007
+    - attack.T1218.011
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        - ParentImage|endswith: '\msiexec.exe'
+    selection_path:
+        CommandLine|contains:
+            - '/HideWindow'
+            - '.dll,'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium
