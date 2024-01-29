@@ -8,6 +8,7 @@ references:
     - <internet link>
 author: Trent Liffick
 date: 2023/06/02
+modified: 2023/12/15 
 tags:
     - attack.defense_evasion
     - attack.T1218.001
@@ -20,7 +21,12 @@ detection:
     selection_path:
         CommandLine|contains:
             - '\AppData\Local\Temp\'
+            - '%LOCALAPPDATA%\Temp'
+            - '%TEMP%'
+        CommandLine_ext|contains:
             - '.dll,#'
+            - '.dll, #'
+            - '.dll #'
     condition: all of selection_*
 falsepositives:
     - Unknown
