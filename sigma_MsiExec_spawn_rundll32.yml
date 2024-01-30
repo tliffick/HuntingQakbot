@@ -1,0 +1,24 @@
+title: MsiExec spawning rundll32 binary
+id: dab6e9d4-d841-4ea5-8173-981cf81240d1
+status: experimental
+description: The msiengine (msiexec.exe) was observed spawning rundll32.exe.  This behavior has been observed in Qakbot campaigns in early 2023.
+references:
+    - <internet link>
+author: Trent Liffick
+date: 2023/12/05
+tags:
+    - attack.defense_evasion
+    - attack.T1218.007
+    - attack.T1218.011
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection_details:
+        ParentImage|endswith: '\msiexec.exe'
+        Image|endswith:
+            - '\rundll32.exe'
+    condition: all of selection_*
+falsepositives:
+    - unknown
+level: medium
