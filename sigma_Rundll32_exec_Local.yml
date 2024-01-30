@@ -1,0 +1,25 @@
+title: Rundll32.exe executing dll in Local
+id: 3dfa94ef-0db5-49a4-9262-e6c94f0222cb
+status: experimental
+description: A rundll32.exe command-line argument contained TTPs of a recent Qakbot sample where a .dll file is loaded from the root of %LOCALAPPDATA% directory
+references:
+    - <internet link>
+author: Trent Liffick
+date: 2023/12/18
+tags:
+    - attack.defense_evasion
+    - attack.T1218.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        - Image|endswith: '\rundll32.exe'
+    selection_path:
+        CommandLine|contains:
+            - '\AppData\Local\'
+            - '.dll,'
+    condition: all of selection_*
+falsepositives:
+    - Unknown
+level: medium

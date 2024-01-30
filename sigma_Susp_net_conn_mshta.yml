@@ -1,22 +1,20 @@
-title: Suspicious network connection from curl
-id: 0c6d8908-3fa1-427c-ab17-46585cdf97a8
+title: Suspicious network connection from mshta
+id: f463515a-68cc-4c71-ba58-3d55853f21ed
 status: experimental
-description: curl.exe established a network connection via internet protocols
+description: mshta.exe established a network connection via internet protocols
 references:
     - <internal link>
 author: Trent Liffick
 date: 2022/06/24
 tags:
-    - attack.command_and_control
-    - attack.T1105
     - attack.defense_evasion
-    - attack.T1218.001
+    - attack.T1218.005
 logsource:
     product: windows
     category: process_creation
 detection:
     selection_details:
-        Image|endswith: '\rundll32.exe'
+        Image|endswith: '\mshta.exe'
         CommandLine|contains:
             - 'http://'
             - 'https://'
